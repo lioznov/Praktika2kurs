@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Все записи
+{% endblock %}
+
+{% block content %}
+<h1>Все записи</h1>
+
+<div class="row g-4">
+    <!-- Карточка 1 -->
+    {% for post in posts %}
+    <div class="col-md-6">
+        <div class="card h-100 shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title text-uppercase">{{ post.title }}</h5>
+                <hr class="title-divider">
+                <p class="card-text">
+                    {{ post.text }}
+                </p>
+                <a href="#" class="read-more">Читать далее <span class="arrow">➔</span></a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

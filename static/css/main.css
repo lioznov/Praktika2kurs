@@ -1,0 +1,47 @@
+/* HEADER */
+header{
+    position: sticky;
+    top: 0;
+    z-index:1000;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 20);
+    background-color: #fff; /* Белый фон для контраста с тенью */
+    border-radius: 8px; /* Закругленные углы для более мягкого вида */
+    padding:10px;
+}
+
+.header__img{
+    height: 64px;
+    width: 114px;
+    border-radius: 20px;
+    padding: 5px;
+}
+body {
+    margin: 0;
+}
+
+*,
+*:before,
+*:after{
+    box-sizing: border-box;
+}
+
+header, footer{
+    padding: 20px;
+    background-color: white;
+
+}
+
+.page{
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.content{
+    max-width: 100vh;
+    margin: 0 auto;
+    padding: 40px 20px;
+
+    flex: 1 1 auto;
+}
