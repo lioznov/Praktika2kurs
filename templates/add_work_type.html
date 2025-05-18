@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Добавить вид работы
+{% endblock %}
+
+{% block content %}
+<h1>Добавить вид работы</h1>
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+            <div class="alert alert-{{ category }}">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+<form method="post" class="form-control">
+    <input type="text" name="name" placeholder="Название вида работы" class="form-control" required><br>
+    <textarea name="description" placeholder="Описание вида работы" class="form-control"></textarea><br>
+    <button class="btn btn-success" type="submit">Добавить</button>
+</form>
+<p><a href="{{ url_for('work_types') }}" class="btn btn-secondary mt-3">Назад</a></p>
+{% endblock %}

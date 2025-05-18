@@ -1,47 +1,89 @@
 /* HEADER */
-header{
+header {
     position: sticky;
     top: 0;
-    z-index:1000;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 20);
-    background-color: #fff; /* Белый фон для контраста с тенью */
-    border-radius: 8px; /* Закругленные углы для более мягкого вида */
-    padding:10px;
+    z-index: 1000;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 10px;
 }
 
-.header__img{
+.header__img {
     height: 64px;
     width: 114px;
     border-radius: 20px;
     padding: 5px;
+    object-fit: cover;
 }
+
 body {
     margin: 0;
 }
 
 *,
 *:before,
-*:after{
+*:after {
     box-sizing: border-box;
 }
 
-header, footer{
+header, footer {
     padding: 20px;
     background-color: white;
-
 }
 
-.page{
+.page {
     overflow: hidden;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
 }
 
-.content{
-    max-width: 100vh;
+.content {
+    max-width: 1200px;
     margin: 0 auto;
     padding: 40px 20px;
-
     flex: 1 1 auto;
+}
+
+/* Стили для форм */
+.form-control {
+    margin-bottom: 15px;
+}
+
+.form-control input,
+.form-control select,
+.form-control button {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.form-control button {
+    width: auto;
+    background-color: #28a745;
+    color: white;
+    border: none;
+}
+
+.form-control button:hover {
+    background-color: #218838;
+}
+
+/* Стили для сообщений */
+.alert {
+    margin-bottom: 15px;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.alert-success {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.alert-error {
+    background-color: #f8d7da;
+    color: #721c24;
 }

@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Управление видами работ
+{% endblock %}
+
+{% block content %}
+<h1>Управление видами работ</h1>
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+            <div class="alert alert-{{ category }}">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+<p><a href="{{ url_for('add_work_type') }}" class="btn btn-primary">Добавить новый вид работы</a></p>
+<div class="row g-4">
+    {% for work_type in work_types %}
+    <div class="col-md-6">
+        <div class="card h-100 shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title text-uppercase">{{ work_type.name }}</h5>
+                <hr class="title-divider">
+                <p class="card-text">{{ work_type.description }}</p>
+                <a href="{{ url_for('edit_work_type', id=work_type.id) }}" class="btn btn-warning">Редактировать</a>
+                <a href="{{ url_for('delete_work_type', id=work_type.id) }}" class="btn btn-danger" onclick="return confirm('Вы уверены, что хотите удалить этот вид работы?')">Удалить</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+<p><a href="{{ url_for('profile') }}" class="btn btn-primary mt-3">Назад в профиль</a></p>
+{% endblock %}

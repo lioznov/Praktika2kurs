@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Редактировать исполнителя
+{% endblock %}
+
+{% block content %}
+<h1>Редактировать исполнителя</h1>
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+            <div class="alert alert-{{ category }}">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+<form method="post" class="form-control">
+    <input type="text" name="name" value="{{ mechanic.name }}" class="form-control" required><br>
+    <input type="text" name="phone" value="{{ mechanic.phone if mechanic.phone else '' }}" placeholder="Номер телефона (10 цифр)" class="form-control"><br>
+    <input type="text" name="specialization" value="{{ mechanic.specialization if mechanic.specialization else '' }}" placeholder="Специализация" class="form-control"><br>
+    <button class="btn btn-success" type="submit">Сохранить</button>
+</form>
+<p><a href="{{ url_for('mechanics') }}" class="btn btn-secondary mt-3">Назад</a></p>
+{% endblock %}

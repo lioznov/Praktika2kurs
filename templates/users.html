@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Управление пользователями
+{% endblock %}
+
+{% block content %}
+<h1>Управление пользователями</h1>
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+            <div class="alert alert-{{ category }}">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+<div class="row g-4">
+    {% for user in users %}
+    <div class="col-md-6">
+        <div class="card h-100 shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title text-uppercase">{{ user.username }}</h5>
+                <hr class="title-divider">
+                <p class="card-text">
+                    <strong>Дата рождения:</strong> {{ user.date_of_birth }}<br>
+                    <strong>Пол:</strong>
+                    {% if user.gender == 'male' %}Мужской
+                    {% elif user.gender == 'female' %}Женский
+                    {% else %}Другой{% endif %}<br>
+                    <strong>Роль:</strong> {{ 'Администратор' if user.role == 'admin' else 'Пользователь' }}
+                </p>
+                <a href="{{ url_for('edit_user', id=user.id) }}" class="btn btn-warning">Редактировать</a>
+                <a href="{{ url_for('delete_user', id=user.id) }}" class="btn btn-danger" onclick="return confirm('Вы уверены, что хотите удалить этого пользователя?')">Удалить</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+<p><a href="{{ url_for('profile') }}" class="btn btn-primary mt-3">Назад в профиль</a></p>
+{% endblock %}

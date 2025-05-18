@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Оплата заказа
+{% endblock %}
+
+{% block content %}
+<h1>Оплата заказа</h1>
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+            <div class="alert alert-{{ category }}">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+<p><strong>Вид работы:</strong> {{ order.work_type.name }}</p>
+<form method="post" class="form-control">
+    <input type="text" name="card_number" placeholder="Номер карты (16 цифр)" class="form-control" required><br>
+    <input type="text" name="expiry_date" placeholder="Срок действия (MM/YY)" class="form-control" required><br>
+    <input type="text" name="cvv" placeholder="CVV (3 цифры)" class="form-control" required><br>
+    <button class="btn btn-success" type="submit">Оплатить</button>
+</form>
+<p><a href="{{ url_for('profile') }}" class="btn btn-secondary mt-3">Назад</a></p>
+{% endblock %}

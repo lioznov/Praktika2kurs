@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Управление исполнителями
+{% endblock %}
+
+{% block content %}
+<h1>Управление исполнителями</h1>
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+            <div class="alert alert-{{ category }}">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+<p><a href="{{ url_for('add_mechanic') }}" class="btn btn-primary">Добавить нового исполнителя</a></p>
+<div class="row g-4">
+    {% for mechanic in mechanics %}
+    <div class="col-md-6">
+        <div class="card h-100 shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title text-uppercase">{{ mechanic.name }}</h5>
+                <hr class="title-divider">
+                <p class="card-text">
+                    <strong>Телефон:</strong> {{ mechanic.phone if mechanic.phone else 'Не указан' }}<br>
+                    <strong>Специализация:</strong> {{ mechanic.specialization if mechanic.specialization else 'Не указана' }}
+                </p>
+                <a href="{{ url_for('edit_mechanic', id=mechanic.id) }}" class="btn btn-warning">Редактировать</a>
+                <a href="{{ url_for('delete_mechanic', id=mechanic.id) }}" class="btn btn-danger" onclick="return confirm('Вы уверены, что хотите удалить этого исполнителя?')">Удалить</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+<p><a href="{{ url_for('profile') }}" class="btn btn-primary mt-3">Назад в профиль</a></p>
+{% endblock %}

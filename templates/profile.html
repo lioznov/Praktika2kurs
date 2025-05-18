@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Профиль
+{% endblock %}
+
+{% block content %}
+<h1>Ваш профиль</h1>
+<p><strong>Имя пользователя:</strong> {{ user.username }}</p>
+<p><strong>Дата рождения:</strong> {{ user.date_of_birth }}</p>
+<p><strong>Пол:</strong>
+    {% if user.gender == 'male' %}Мужской
+    {% elif user.gender == 'female' %}Женский
+    {% else %}Другой{% endif %}
+</p>
+<p><strong>Роль:</strong> {{ 'Администратор' if user.role == 'admin' else 'Пользователь' }}</p>
+<p><strong>Телефон:</strong> {{ user.phone if user.phone else 'Не указан' }}</p>
+<p><strong>Email:</strong> {{ user.email if user.email else 'Не указан' }}</p>
+<p><a href="{{ url_for('logout') }}" class="btn btn-danger">Выйти</a></p>
+{% if user.is_admin() %}
+    <p><a href="{{ url_for('users') }}" class="btn btn-primary">Управление пользователями</a></p>
+    <p><a href="{{ url_for('work_types') }}" class="btn btn-primary">Управление видами работ</a></p>
+    <p><a href="{{ url_for('mechanics') }}" class="btn btn-primary">Управление исполнителями</a></p> <!-- Новая кнопка -->
+{% endif %}
+
+<h2>Ваши заказы</h2>
+{% if orders %}
+    <div class="row g-4">
+        {% for order in orders %}
+        <div class="col-md-6">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title text-uppercase">{{ order.work_type.name }}</h5>
+                    <hr class="title-divider">
+                    <p class="card-text">
+                        <strong>Описание:</strong> {{ order.work_type.description }}<br>
+                        <strong>Дата создания:</strong> {{ order.created_at.strftime('%Y-%m-%d %H:%M:%S') }}<br>
+                        <strong>Статус оплаты:</strong> {{ 'Оплачено' if order.is_paid else 'Не оплачено' }}
+                    </p>
+                    {% if not order.is_paid %}
+                        <a href="{{ url_for('pay_order', order_id=order.id) }}" class="btn btn-success">Оплатить</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+{% else %}
+    <p>У вас пока нет заказов.</p>
+{% endif %}
+{% endblock %}
